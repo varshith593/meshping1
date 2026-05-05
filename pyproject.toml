@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "meshping"
+version = "0.1.0"
+description = "Measure latency across multiple network nodes with a live terminal matrix."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "Codex" }
+]
+dependencies = [
+  "click>=8.1",
+  "pydantic>=2.7",
+  "rich>=13.7",
+  "structlog>=24.1",
+  "aiodns>=3.2",
+  "aiohttp>=3.9",
+  "plotext>=5.2",
+  "uvloop>=0.19; platform_system != 'Windows'",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.2",
+  "pytest-asyncio>=0.23",
+]
+
+[project.scripts]
+meshping = "meshping.cli.main:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["meshping*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
